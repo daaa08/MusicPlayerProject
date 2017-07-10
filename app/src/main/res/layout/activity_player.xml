@@ -25,7 +25,7 @@
         android:layout_alignParentStart="true">
 
         <TextView
-            android:id="@+id/txtTitle"
+            android:id="@+id/txtTitleP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -35,10 +35,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtSinger"
+            android:id="@+id/txtSingerP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtTitle"
+            android:layout_below="@+id/txtTitleL"
             android:layout_marginLeft="10dp"
             android:text="singer"
             android:textSize="20dp" />
@@ -47,47 +47,47 @@
             android:id="@+id/seekBar"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/btnPre"
-            android:layout_alignStart="@+id/btnPre"
-            android:layout_below="@+id/txtSinger"
+            android:layout_alignLeft="@+id/btnPreP"
+            android:layout_alignStart="@+id/btnPreP"
+            android:layout_below="@+id/txtSingerL"
             android:layout_marginTop="14dp" />
 
         <ImageButton
-            android:id="@+id/btnShare"
+            android:id="@+id/btnShareP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/btnUpload"
+            android:layout_alignLeft="@+id/btnUploadP"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/btnUpload"
+            android:layout_alignStart="@+id/btnUploadP"
             app:srcCompat="@drawable/ic_menu_share" />
 
         <ImageButton
-            android:id="@+id/btnUpload"
+            android:id="@+id/btnUploadP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/txtTitle"
+            android:layout_below="@+id/txtTitleL"
             android:layout_marginEnd="11dp"
             android:layout_marginRight="11dp"
             app:srcCompat="@drawable/ic_menu_send" />
 
         <ImageButton
-            android:id="@+id/btnPlay"
+            android:id="@+id/btnPlayP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/btnPre"
+            android:layout_alignTop="@+id/btnPreP"
             android:layout_marginLeft="42dp"
             android:layout_marginStart="42dp"
-            android:layout_toEndOf="@+id/btnPre"
-            android:layout_toRightOf="@+id/btnPre"
+            android:layout_toEndOf="@+id/btnPreP"
+            android:layout_toRightOf="@+id/btnPreP"
             app:srcCompat="@android:drawable/ic_media_pause" />
 
         <ImageButton
-            android:id="@+id/btvNext"
+            android:id="@+id/btvNextP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btnLike"
+            android:layout_alignBottom="@+id/btnLikeP"
             android:layout_alignEnd="@+id/seekBar"
             android:layout_alignRight="@+id/seekBar"
             android:layout_marginEnd="12dp"
@@ -95,21 +95,21 @@
             app:srcCompat="@android:drawable/ic_media_ff" />
 
         <ImageButton
-            android:id="@+id/btnPre"
+            android:id="@+id/btnPreP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btnLike"
-            android:layout_alignEnd="@+id/txtTitle"
-            android:layout_alignRight="@+id/txtTitle"
+            android:layout_alignBottom="@+id/btnLikeP"
+            android:layout_alignEnd="@+id/txtTitleL"
+            android:layout_alignRight="@+id/txtTitleL"
             app:srcCompat="@android:drawable/ic_media_rew" />
 
         <ImageButton
-            android:id="@+id/btnLike"
+            android:id="@+id/btnLikeP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/btnUpload"
+            android:layout_below="@+id/btnUploadP"
             app:srcCompat="@mipmap/ic_launcher" />
     </RelativeLayout>
 

@@ -61,4 +61,12 @@
         app:srcCompat="@mipmap/ic_launcher"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="120dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="-5dp"
+        tools:layout_editor_absoluteY="-11dp" />
 </android.support.constraint.ConstraintLayout>
