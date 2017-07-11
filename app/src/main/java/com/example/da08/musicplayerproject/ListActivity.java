@@ -8,18 +8,22 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.da08.musicplayerproject.domain.CurrentMusic;
 import com.example.da08.musicplayerproject.domain.Data;
 
 import java.util.List;
 
-public class PlayListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     TextView txtTitleL, txtSingerL;
     ImageView imgAlbumL;
     ImageButton btnPlayL;
+    ListAdapter adapter;
 
-    CustomAdapter adapter;
+    int position;
+
+    List<Data.Music> datas = CurrentMusic.Instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +36,11 @@ public class PlayListActivity extends AppCompatActivity {
         imgAlbumL = (ImageView)findViewById(R.id.imgAlbumL);
         btnPlayL = (ImageButton)findViewById(R.id.btnPlayL);
 
-        adapter = new CustomAdapter(this);
-
-        List<Data.Music>data = Data.read(this);  // 데이터 가져옴
-        adapter.setData(data);
+        adapter = new ListAdapter(this);
+        CurrentMusic.Instance = Data.read(this);
+        datas = CurrentMusic.Instance;
+        adapter.setData(datas);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
     }
 }

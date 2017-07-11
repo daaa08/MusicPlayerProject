@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity implements PermissionContro
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, PlayListActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ListActivity.class);
                 startActivity(intent);
             }
         });
