@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder>{
-
+//    Callback callback;
     Context context;
     List<Data.Music> datas = CurrentMusic.Instance;
 
@@ -31,6 +31,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder>{
 
     public ListAdapter(Context context) {
         this.context = context;
+//        callback = (Callback) context;
     }
 
     public void setData(List<Data.Music> datas){  // 음악 목록 데이터 세팅
@@ -65,6 +66,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder>{
         holder.txtTitle.setText(datas.get(position).title);
         holder.txtSinger.setText(datas.get(position).artist);
         Glide.with(context).load(datas.get(position).albumArt).into(holder.imgAlbum);
+//        callback.itemSelected(position);
+
     }
 
     class Holder extends RecyclerView.ViewHolder {
@@ -99,5 +102,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder>{
 
     }
 
-
+     public interface Callback{
+        public void itemSelected(int position);
+    }
 }
