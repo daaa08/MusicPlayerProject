@@ -21,7 +21,6 @@ public class ListActivity extends AppCompatActivity {
     ImageButton btnPlayL;
     ListAdapter adapter;
 
-    int position;
 
     List<Data.Music> datas = CurrentMusic.Instance;
 

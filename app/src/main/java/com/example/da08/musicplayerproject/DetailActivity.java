@@ -7,9 +7,9 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.da08.musicplayerproject.domain.CurrentMusic;
 import com.example.da08.musicplayerproject.domain.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,7 +21,8 @@ public class DetailActivity extends AppCompatActivity {
     SeekBar seekBar;
     ImageButton btnShareP, btnUploadP, btnPlayP, btnNextP,btnPreP, btnLikeP;
 
-    List<Data.Music> datas = new ArrayList<>();
+    List<Data.Music> datas = CurrentMusic.Instance;
+    int position = CurrentMusic.currentPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,9 @@ public class DetailActivity extends AppCompatActivity {
         btnPreP = (ImageButton)findViewById(R.id.btnPreP);
         btnLikeP = (ImageButton)findViewById(R.id.btnLikeP);
 
+
+        txtTitleP.setText(datas.get(position).title);
+        txtSingerP.setText(datas.get(position).artist);
     }
 
 }
