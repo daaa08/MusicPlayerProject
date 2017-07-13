@@ -1,7 +1,10 @@
 package com.example.da08.musicplayerproject;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +31,9 @@ public class ListActivity extends AppCompatActivity implements ListAdapter.Callb
     ListAdapter adapter;
 
     List<Data.Music> datas = CurrentMusic.Instance;
+
+    Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+    private static MediaPlayer player = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +123,19 @@ public class ListActivity extends AppCompatActivity implements ListAdapter.Callb
                 CurrentMusic.currentPosition = position;
                 startActivity(intent);
 
+            }
+        });
+
+        btnPlayL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                musicUri = datas.get(position).musicUri;
+                if (player != null) {
+                    player.release();
+                }
+                player = MediaPlayer.create(ListActivity.this, musicUri);
+                player.setLooping(false);
+                player.start();
             }
         });
 

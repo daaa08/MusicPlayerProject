@@ -1,6 +1,5 @@
 package com.example.da08.musicplayerproject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -32,9 +31,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     List<Data.Music> datas = CurrentMusic.Instance;
     int position = CurrentMusic.currentPosition;
 
-    Context context;
     private static MediaPlayer player = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +77,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnPreP:
-                play(position-1);
+                previous(position);
                 break;
 
             case R.id.btnPlayP:
@@ -124,16 +121,17 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         player.start();
     }
 
-    private void setNextMediaPlayer(MediaPlayer next) {
-       musicUri = datas.get(position+1).musicUri;
-        if(player != null){
+    private void previous(int position){
+        musicUri = datas.get(position-1).musicUri;
+        if (player != null) {
             player.release();
         }
-        player.setNextMediaPlayer(next);
+        player = MediaPlayer.create(this, musicUri);
         player.setLooping(false);
         player.start();
 
     }
+
 }
 
 
