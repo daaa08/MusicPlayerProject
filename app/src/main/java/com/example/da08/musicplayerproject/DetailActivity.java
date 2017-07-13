@@ -1,5 +1,6 @@
 package com.example.da08.musicplayerproject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -22,6 +23,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
+    Context context;
+
     TextView txtTitleP;
     TextView txtSingerP;
     ViewPager viewPager;
@@ -30,6 +33,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     Uri MUSIC_PLAY = null;
     List<Data.Music> datas = CurrentMusic.Instance;
     int position = CurrentMusic.currentPosition;
+
+    DetailAdapter adapter = new DetailAdapter(datas);
 
     private static MediaPlayer player = null;
 
@@ -49,7 +54,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-
         txtTitleP = (TextView) findViewById(R.id.txtTitleP);
         txtSingerP = (TextView) findViewById(R.id.txtSingerP);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
@@ -64,12 +68,16 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         txtTitleP.setText(datas.get(position).title);
         txtSingerP.setText(datas.get(position).artist);
 
+
         btnPlayP.setOnClickListener(this);
         btnPlayP.setOnClickListener(this);
         btnNextP.setOnClickListener(this);
         btnShareP.setOnClickListener(this);
         btnUploadP.setOnClickListener(this);
         btnLikeP.setOnClickListener(this);
+
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(position);
     }
 
 
@@ -131,7 +139,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         player.start();
 
     }
-
 }
 
 
