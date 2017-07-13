@@ -19,7 +19,7 @@ import com.example.da08.musicplayerproject.domain.Data;
 import java.util.List;
 
 
-public class DetailActivity extends AppCompatActivity implements View.OnClickListener{
+public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
@@ -27,8 +27,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     TextView txtSingerP;
     ViewPager viewPager;
     SeekBar seekBar;
-    ImageButton btnShareP, btnUploadP, btnPlayP, btnNextP,btnPreP, btnLikeP, btnMenu, btnClose;
-
+    ImageButton btnShareP, btnUploadP, btnPlayP, btnNextP, btnPreP, btnLikeP, btnMenu, btnClose;
+    Uri MUSIC_PLAY = null;
     List<Data.Music> datas = CurrentMusic.Instance;
     int position = CurrentMusic.currentPosition;
 
@@ -40,21 +40,27 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-//        Intent intent = new Intent();
-//        intent bundle =
+        // intent값 가져오기
+        Intent intent = getIntent();
+        if (intent != null) {
+            String temp = "";
+            temp = intent.getStringExtra("MUSIC_PLAY");
+            MUSIC_PLAY = Uri.parse(temp);
+
+        }
 
 
-        viewPager = (ViewPager)findViewById(R.id.viewPager);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        txtTitleP = (TextView)findViewById(R.id.txtTitleP);
-        txtSingerP = (TextView)findViewById(R.id.txtSingerP);
-        seekBar = (SeekBar)findViewById(R.id.seekBar);
-        btnShareP = (ImageButton)findViewById(R.id.btnShareP);
-        btnUploadP = (ImageButton)findViewById(R.id.btnUploadP);
-        btnPlayP = (ImageButton)findViewById(R.id.btnPlayP);
-        btnNextP = (ImageButton)findViewById(R.id.btnNextP);
-        btnPreP = (ImageButton)findViewById(R.id.btnPreP);
-        btnLikeP = (ImageButton)findViewById(R.id.btnLikeP);
+        txtTitleP = (TextView) findViewById(R.id.txtTitleP);
+        txtSingerP = (TextView) findViewById(R.id.txtSingerP);
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        btnShareP = (ImageButton) findViewById(R.id.btnShareP);
+        btnUploadP = (ImageButton) findViewById(R.id.btnUploadP);
+        btnPlayP = (ImageButton) findViewById(R.id.btnPlayP);
+        btnNextP = (ImageButton) findViewById(R.id.btnNextP);
+        btnPreP = (ImageButton) findViewById(R.id.btnPreP);
+        btnLikeP = (ImageButton) findViewById(R.id.btnLikeP);
 
 
         txtTitleP.setText(datas.get(position).title);
@@ -71,25 +77,25 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnPreP :
+        switch (v.getId()) {
+            case R.id.btnPreP:
 
                 break;
-            case R.id.btnPlayP :
+            case R.id.btnPlayP:
                 musicUri = datas.get(position).musicUri;
-                if(player != null){
+                if (player != null) {
                     player.release();
                 }
-                player = MediaPlayer.create(context, musicUri);
+                player = MediaPlayer.create(this, MUSIC_PLAY);
                 player.setLooping(false);
                 player.start();
 
                 break;
 
-            case R.id.btnNextP :
+            case R.id.btnNextP:
 
                 break;
-            case R.id.btnShareP :
+            case R.id.btnShareP:
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_SEND);
                 intent.setType("text/plain");
@@ -99,11 +105,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 break;
 
-            case R.id.btnUploadP :
+            case R.id.btnUploadP:
 
                 break;
 
-            case R.id.btnLikeP :
+            case R.id.btnLikeP:
 
                 break;
         }

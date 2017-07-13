@@ -90,7 +90,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder>{
                 @Override
                 public boolean onLongClick(View v) {
                     Intent intent = new Intent(view.getContext(), DetailActivity.class);
-                    intent.putExtra("MUSIC_PLAY", datas.get(position).musicUri);   // musicUri 값 넘기기
+                    intent.putExtra("MUSIC_PLAY", datas.get(position).musicUri.toString());   // musicUri 값 넘기기
                     CurrentMusic.currentPosition = position;
                     view.getContext().startActivity(intent);
 

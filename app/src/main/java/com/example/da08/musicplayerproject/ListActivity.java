@@ -102,11 +102,12 @@ public class ListActivity extends AppCompatActivity implements ListAdapter.Callb
 
 
     @Override
-    public void itemSelected(int position) {
+    public void itemSelected(final int position) {
         txtTitleL.setText(datas.get(position).title);
         txtSingerL.setText(datas.get(position).artist);
         Glide.with(this).load(datas.get(position).albumArt).placeholder(R.mipmap.ic_launcher_round)
                 .bitmapTransform(new CropCircleTransformation(this)).into(imgAlbumL);
+
 
     }
 
