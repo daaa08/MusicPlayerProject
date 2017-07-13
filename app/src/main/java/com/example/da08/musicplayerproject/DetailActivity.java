@@ -63,7 +63,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         btnNextP = (ImageButton) findViewById(R.id.btnNextP);
         btnPreP = (ImageButton) findViewById(R.id.btnPreP);
         btnLikeP = (ImageButton) findViewById(R.id.btnLikeP);
-
+        btnClose = (ImageButton) findViewById(R.id.btnClose);
 
         txtTitleP.setText(datas.get(position).title);
         txtSingerP.setText(datas.get(position).artist);
@@ -75,6 +75,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         btnShareP.setOnClickListener(this);
         btnUploadP.setOnClickListener(this);
         btnLikeP.setOnClickListener(this);
+        btnClose.setOnClickListener(this);
 
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(position);
@@ -106,6 +107,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
             case R.id.btnLikeP:
 
+                break;
+            case R.id.btnClose:
+                Intent intent = new Intent(this, ListActivity.class);
+                startActivity(intent);
                 break;
         }
     }
