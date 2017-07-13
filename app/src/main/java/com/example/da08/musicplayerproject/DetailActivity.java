@@ -35,6 +35,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     Context context;
     private static MediaPlayer player = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,30 +80,19 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnPreP:
-
+                play(position-1);
                 break;
-            case R.id.btnPlayP:
-                musicUri = datas.get(position).musicUri;
-                if (player != null) {
-                    player.release();
-                }
-                player = MediaPlayer.create(this, MUSIC_PLAY);
-                player.setLooping(false);
-                player.start();
 
+            case R.id.btnPlayP:
+               play(position);
                 break;
 
             case R.id.btnNextP:
-
+                play(position+1);
                 break;
-            case R.id.btnShareP:
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "음악공유");
-                Intent chooser = Intent.createChooser(intent, "공유");
-                startActivity(chooser);
 
+            case R.id.btnShareP:
+                sharing();
                 break;
 
             case R.id.btnUploadP:
@@ -113,6 +103,36 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 break;
         }
+    }
+
+    private void sharing(){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "음악공유");
+        Intent chooser = Intent.createChooser(intent, "공유");
+        startActivity(chooser);
+    }
+
+    private void play(int position){
+        musicUri = datas.get(position).musicUri;
+        if (player != null) {
+            player.release();
+        }
+        player = MediaPlayer.create(this, musicUri);
+        player.setLooping(false);
+        player.start();
+    }
+
+    private void setNextMediaPlayer(MediaPlayer next) {
+       musicUri = datas.get(position+1).musicUri;
+        if(player != null){
+            player.release();
+        }
+        player.setNextMediaPlayer(next);
+        player.setLooping(false);
+        player.start();
+
     }
 }
 

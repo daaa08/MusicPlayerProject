@@ -1,5 +1,6 @@
 package com.example.da08.musicplayerproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -108,6 +109,16 @@ public class ListActivity extends AppCompatActivity implements ListAdapter.Callb
         Glide.with(this).load(datas.get(position).albumArt).placeholder(R.mipmap.ic_launcher_round)
                 .bitmapTransform(new CropCircleTransformation(this)).into(imgAlbumL);
 
+        imgAlbumL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListActivity.this, DetailActivity.class);
+                intent.putExtra("MUSIC_PLAY", datas.get(position).musicUri.toString());   // musicUri 값 넘기기
+                CurrentMusic.currentPosition = position;
+                startActivity(intent);
+
+            }
+        });
 
     }
 
