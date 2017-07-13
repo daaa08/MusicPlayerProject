@@ -1,11 +1,9 @@
 package com.example.da08.musicplayerproject;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -25,10 +23,8 @@ public class ListActivity extends AppCompatActivity implements ListAdapter.Callb
     RecyclerView recyclerView;
     TextView txtTitleL, txtSingerL;
     ImageView imgAlbumL;
-    ImageButton btnPlayL;
+    ImageButton btnPlayL, btnMenuL, btnSearchL;
     ListAdapter adapter;
-
-    Context context;
 
     List<Data.Music> datas = CurrentMusic.Instance;
 
@@ -49,31 +45,58 @@ public class ListActivity extends AppCompatActivity implements ListAdapter.Callb
         adapter.setData(datas);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             float downX, downY;
+
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.e(getClass().getSimpleName(),"onTouch");
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                        downX = event.getX();
-                        downY = event.getY();
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_POINTER_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        Log.e(getClass().getSimpleName(),downY+": "+event.getY());
-                        View view = recyclerView.findChildViewUnder(event.getX(),event.getY());
-                        if (view.getHeight() > Math.abs(downY - event.getY())) {
-                            int position = recyclerView.getChildAdapterPosition(view);
-                            itemSelected(position);
-                        }
-                        return false;
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                downX = e.getX();
+                downY = e.getY();
+                View v = recyclerView.findChildViewUnder(e.getX(),e.getY());
+                if(v.getHeight() > Math.abs(downY - e.getY())){
+                    int position = recyclerView.getChildAdapterPosition(v);
+                    itemSelected(position);
                 }
                 return false;
             }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
         });
+
+//        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+//            float downX, downY;
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.e(getClass().getSimpleName(),"onTouch");
+//                switch (event.getAction()){
+//                    case MotionEvent.ACTION_DOWN:
+//                    case MotionEvent.ACTION_POINTER_DOWN:
+//                        downX = event.getX();
+//                        downY = event.getY();
+//                        return true;
+//                    case MotionEvent.ACTION_UP:
+//                    case MotionEvent.ACTION_POINTER_UP:
+//                    case MotionEvent.ACTION_CANCEL:
+//                        Log.e(getClass().getSimpleName(),downY+": "+event.getY());
+//                        View view = recyclerView.findChildViewUnder(event.getX(),event.getY());
+//                        if (view.getHeight() > Math.abs(downY - event.getY())) {
+//                            int position = recyclerView.getChildAdapterPosition(view);
+//                            itemSelected(position);
+//                        }
+//                        return false;
+//                }
+//                return false;
+//            }
+//        });
 
     }
 

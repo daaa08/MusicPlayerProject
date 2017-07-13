@@ -27,7 +27,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     TextView txtSingerP;
     ViewPager viewPager;
     SeekBar seekBar;
-    ImageButton btnShareP, btnUploadP, btnPlayP, btnNextP,btnPreP, btnLikeP;
+    ImageButton btnShareP, btnUploadP, btnPlayP, btnNextP,btnPreP, btnLikeP, btnMenu, btnClose;
 
     List<Data.Music> datas = CurrentMusic.Instance;
     int position = CurrentMusic.currentPosition;
@@ -39,6 +39,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
+
+//        Intent intent = new Intent();
+//        intent bundle =
+
 
         viewPager = (ViewPager)findViewById(R.id.viewPager);
 
