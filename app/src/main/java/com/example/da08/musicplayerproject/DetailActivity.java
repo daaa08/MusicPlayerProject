@@ -19,7 +19,7 @@ import com.example.da08.musicplayerproject.domain.Data;
 import java.util.List;
 
 
-public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class DetailActivity extends AppCompatActivity implements View.OnClickListener , NextAndPre {
 
     Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
@@ -123,7 +123,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnPreP:
-                previous(position);
+
                 break;
 
             case R.id.btnPlayP:
@@ -176,16 +176,15 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         isPlaying = true; // 씨크바 쓰레드 반복 하도록
     }
 
-    private void previous(int position){
-
-
-    }
-
-    private void next(int position){
+    @Override
+    public void Next() {
 
     }
 
+    @Override
+    public void Pre() {
 
+    }
 }
 
 
