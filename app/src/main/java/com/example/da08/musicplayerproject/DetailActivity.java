@@ -123,15 +123,15 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnPreP:
-
+                Pre();
                 break;
 
             case R.id.btnPlayP:
-               play(position);
+               play();
                 break;
 
             case R.id.btnNextP:
-                play(position+1);
+                Next();
                 break;
 
             case R.id.btnShareP:
@@ -161,7 +161,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         startActivity(chooser);
     }
 
-    private void play(int position){
+    private void play(){
+
         musicUri = datas.get(position).musicUri;
         if (player != null) {
             player.release();
@@ -170,19 +171,29 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         player.setLooping(false);
         player.start();
 
-        int a = player.getDuration(); // 노래의 재생시간(miliSecond)
-        seekBar.setMax(a);// 씨크바의 최대 범위를 노래의 재생시간으로 설정
-        new SeekBarThread().start(); // 씨크바 그려줄 쓰레드 시작
-        isPlaying = true; // 씨크바 쓰레드 반복 하도록
+//        int a = player.getDuration(); // 노래의 재생시간(miliSecond)
+//        seekBar.setMax(a);// 씨크바의 최대 범위를 노래의 재생시간으로 설정
+//        new SeekBarThread().start(); // 씨크바 그려줄 쓰레드 시작
+//        isPlaying = true; // 씨크바 쓰레드 반복 하도록
     }
 
     @Override
     public void Next() {
+        position++;
+        musicUri = datas.get(position).musicUri;
+        if (player != null) {
+            player.release();
+        }
+        player = MediaPlayer.create(this, musicUri);
+        player.setLooping(false);
+        player.start();
 
     }
 
     @Override
     public void Pre() {
+
+
 
     }
 }
