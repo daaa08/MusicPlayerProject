@@ -138,7 +138,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                play();
                 btnPlayP.setVisibility(View.INVISIBLE);
                 btnPauseP.setVisibility(View.VISIBLE);
-                btnReStartP.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.btnNextP:
@@ -163,8 +162,21 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btnPauseP:
                 player.pause();
                 isPlaying = false;
-                btnPlayP.setVisibility(View.VISIBLE);
                 btnPauseP.setVisibility(View.INVISIBLE);
+                btnReStartP.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btnReStartP:
+
+                player.start(); // 시작
+                isPlaying = true; // 재생하도록 flag 변경
+                new SeekBarThread().start(); // 쓰레드 시작
+
+
+                출처: http://bitsoul.tistory.com/28 [Happy Programmer~]
+
+                btnPauseP.setVisibility(View.VISIBLE);
+                btnReStartP.setVisibility(View.INVISIBLE);
+
         }
     }
 
