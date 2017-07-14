@@ -3,7 +3,6 @@ package com.example.da08.musicplayerproject;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,16 +35,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder>{
 
     public void setData(List<Data.Music> datas){  // 음악 목록 데이터 세팅
         this.datas = datas;
-    }
-
-    public void play(int position){
-        Uri musicUri = datas.get(position).musicUri;
-        if(player != null){
-            player.release();
-        }
-        player = MediaPlayer.create(context, musicUri);
-        player.setLooping(false);
-        player.start();
     }
 
     @Override

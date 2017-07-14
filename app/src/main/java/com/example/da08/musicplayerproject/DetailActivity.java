@@ -135,13 +135,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void previous(int position){
-        musicUri = datas.get(position-1).musicUri;
-        if (player != null) {
-            player.release();
-        }
-        player = MediaPlayer.create(this, musicUri);
-        player.setLooping(false);
-        player.start();
+
 
     }
 }
