@@ -109,8 +109,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
                 break;
             case R.id.btnClose:
-                Intent intent = new Intent(this, ListActivity.class);
-                startActivity(intent);
+                this.finish();
+
                 break;
         }
     }
