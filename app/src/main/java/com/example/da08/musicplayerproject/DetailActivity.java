@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -29,7 +30,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     TextView txtSingerP;
     ViewPager viewPager;
     SeekBar seekBar;
-    ImageButton btnShareP, btnUploadP, btnPlayP, btnNextP, btnPreP, btnLikeP, btnMenu, btnClose;
+    ImageButton btnShareP, btnUploadP, btnPlayP, btnNextP, btnPreP, btnLikeP, btnMenu, btnClose, btnPauseP, btnReStartP;
     Uri MUSIC_PLAY = null;
     List<Data.Music> datas = CurrentMusic.Instance;
     int position = CurrentMusic.currentPosition;
@@ -76,18 +77,22 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         btnPreP = (ImageButton) findViewById(R.id.btnPreP);
         btnLikeP = (ImageButton) findViewById(R.id.btnLikeP);
         btnClose = (ImageButton) findViewById(R.id.btnClose);
+        btnPauseP = (ImageButton)findViewById(R.id.btnPauseP);
+        btnReStartP = (ImageButton)findViewById(R.id.btnReStartP);
 
         txtTitleP.setText(datas.get(position).title);
         txtSingerP.setText(datas.get(position).artist);
 
 
         btnPlayP.setOnClickListener(this);
-        btnPlayP.setOnClickListener(this);
+        btnPreP.setOnClickListener(this);
         btnNextP.setOnClickListener(this);
         btnShareP.setOnClickListener(this);
         btnUploadP.setOnClickListener(this);
         btnLikeP.setOnClickListener(this);
         btnClose.setOnClickListener(this);
+        btnPauseP.setOnClickListener(this);
+        btnReStartP.setOnClickListener(this);
 
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(position);
@@ -121,6 +126,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+
+        Log.i("Detail","View id============================"+v.getId());
+        Log.i("Detail","prep id============================"+R.id.btnPreP);
         switch (v.getId()) {
             case R.id.btnPreP:
                 Pre();
@@ -128,6 +136,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
             case R.id.btnPlayP:
                play();
+                btnPlayP.setVisibility(View.INVISIBLE);
+                btnPauseP.setVisibility(View.VISIBLE);
+                btnReStartP.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.btnNextP:
@@ -147,8 +158,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.btnClose:
                 this.finish();
-
                 break;
+
+            case R.id.btnPauseP:
+                player.pause();
+                isPlaying = false;
+                btnPlayP.setVisibility(View.VISIBLE);
+                btnPauseP.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -171,10 +187,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         player.setLooping(false);
         player.start();
 
-//        int a = player.getDuration(); // 노래의 재생시간(miliSecond)
-//        seekBar.setMax(a);// 씨크바의 최대 범위를 노래의 재생시간으로 설정
-//        new SeekBarThread().start(); // 씨크바 그려줄 쓰레드 시작
-//        isPlaying = true; // 씨크바 쓰레드 반복 하도록
+        int a = player.getDuration(); // 노래의 재생시간(miliSecond)
+        seekBar.setMax(a);// 씨크바의 최대 범위를 노래의 재생시간으로 설정
+        new SeekBarThread().start(); // 씨크바 그려줄 쓰레드 시작
+        isPlaying = true; // 씨크바 쓰레드 반복 하도록
     }
 
     @Override
@@ -188,11 +204,21 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         player.setLooping(false);
         player.start();
 
+
     }
 
     @Override
     public void Pre() {
+        Log.i("Detail","position==========================="+position);
+        position--;
+        musicUri = datas.get(position).musicUri;
 
+        if (player != null) {
+            player.release();
+        }
+        player = MediaPlayer.create(this, musicUri);
+        player.setLooping(false);
+        player.start();
 
 
     }

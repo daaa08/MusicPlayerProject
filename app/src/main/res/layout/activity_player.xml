@@ -98,18 +98,6 @@
             app:srcCompat="@drawable/ic_menu_send" />
 
         <ImageButton
-            android:id="@+id/btnPlayP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/btnPreP"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="42dp"
-            android:layout_marginStart="42dp"
-            android:layout_toEndOf="@+id/btnPreP"
-            android:layout_toRightOf="@+id/btnPreP"
-            app:srcCompat="@android:drawable/ic_media_pause" />
-
-        <ImageButton
             android:id="@+id/btnNextP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,6 +129,38 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             app:srcCompat="@mipmap/ic_launcher" />
+
+        <ImageButton
+            android:id="@+id/btnPauseP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/btnPlayP"
+            android:layout_alignTop="@+id/btnPlayP"
+            android:visibility="gone"
+            app:srcCompat="@android:drawable/ic_media_pause" />
+
+        <ImageButton
+            android:id="@+id/btnPlayP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/btnPreP"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="42dp"
+            android:layout_marginStart="42dp"
+            android:layout_toEndOf="@+id/btnPreP"
+            android:layout_toRightOf="@+id/btnPreP"
+            app:srcCompat="@android:drawable/ic_media_play" />
+
+        <ImageButton
+            android:id="@+id/btnReStartP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/btnPlayP"
+            android:layout_alignTop="@+id/btnPlayP"
+            android:visibility="gone"
+            app:srcCompat="@android:drawable/ic_media_play" />
+
+
     </RelativeLayout>
 
 </RelativeLayout>
