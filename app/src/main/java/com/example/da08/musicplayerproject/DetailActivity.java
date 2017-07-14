@@ -171,11 +171,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 isPlaying = true; // 재생하도록 flag 변경
                 new SeekBarThread().start(); // 쓰레드 시작
 
-
-                출처: http://bitsoul.tistory.com/28 [Happy Programmer~]
-
                 btnPauseP.setVisibility(View.VISIBLE);
                 btnReStartP.setVisibility(View.INVISIBLE);
+                break;
 
         }
     }
