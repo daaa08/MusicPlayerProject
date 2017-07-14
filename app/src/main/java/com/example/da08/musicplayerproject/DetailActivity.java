@@ -38,6 +38,18 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     private static MediaPlayer player = null;
 
+    Boolean isPlaying = false;
+
+    class SeekBarThread extends Thread{
+        @Override
+        public void run() {
+            // 씨크바 막대기 조금씩 움직이기 (노래 끝날 때까지 반복)
+            while(isPlaying) {
+                seekBar.setProgress(player.getCurrentPosition());
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +91,31 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(position);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (seekBar.getMax() == progress) {
+                    isPlaying = false;
+                    player.stop();
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                isPlaying = false;
+                player.pause();
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                isPlaying = true;
+                int userControl = seekBar.getProgress(); // 사용자가 움직여놓은 위치
+                player.seekTo(userControl);
+                player.start();
+                new SeekBarThread().start();
+            }
+        });
     }
 
 
@@ -132,12 +169,23 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         player = MediaPlayer.create(this, musicUri);
         player.setLooping(false);
         player.start();
+
+        int a = player.getDuration(); // 노래의 재생시간(miliSecond)
+        seekBar.setMax(a);// 씨크바의 최대 범위를 노래의 재생시간으로 설정
+        new SeekBarThread().start(); // 씨크바 그려줄 쓰레드 시작
+        isPlaying = true; // 씨크바 쓰레드 반복 하도록
     }
 
     private void previous(int position){
 
 
     }
+
+    private void next(int position){
+
+    }
+
+
 }
 
 
