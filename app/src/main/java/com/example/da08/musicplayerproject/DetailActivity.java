@@ -1,6 +1,5 @@
 package com.example.da08.musicplayerproject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -24,8 +23,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
-    Context context;
-
     TextView txtTitleP;
     TextView txtSingerP;
     ViewPager viewPager;
@@ -37,7 +34,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     DetailAdapter adapter = new DetailAdapter(datas);
 
-    private static MediaPlayer player = null;
+    private MediaPlayer player = null;
 
     Boolean isPlaying = false;
 
@@ -205,6 +202,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void Next() {
+        player.release();
         position++;
         musicUri = datas.get(position).musicUri;
         if (player != null) {
@@ -220,6 +218,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void Pre() {
         Log.i("Detail","position==========================="+position);
+        player.release();
+
         position--;
         musicUri = datas.get(position).musicUri;
 
